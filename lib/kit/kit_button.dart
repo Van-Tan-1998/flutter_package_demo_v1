@@ -1427,6 +1427,62 @@ class KitButton extends ElevatedButton {
         clipBehavior: clipBehavior ?? Clip.none,
         child: _KitElevatedButtonWithIconChild(icon: icon, label: label),
       );
+
+  KitButton.gradientColor(
+      {Key? key,
+        required VoidCallback? onPressed,
+        VoidCallback? onLongPress,
+        ValueChanged<bool>? onHover,
+        ValueChanged<bool>? onFocusChange,
+        ButtonStyle? style,
+        FocusNode? focusNode,
+        bool autofocus = false,
+        Clip clipBehavior = Clip.none,
+        required Widget? child,
+        double kitRadius = 4.0,
+        EdgeInsets? kitPadding = const EdgeInsets.all(5.0),
+        double? kitWidth = 200.0,
+        double? kitHeight = 50.0,
+
+        // gradient color properties
+        required List<Color> kitBackgroundColors,
+        required AlignmentGeometry? kitBegin,
+        required AlignmentGeometry? kitEnd})
+      : style = ButtonStyle(
+    padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0.0)),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(kitRadius))),
+    ),
+  ),
+        super(
+        key: key,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        onHover: onHover,
+        onFocusChange: onFocusChange,
+        style: style,
+        focusNode: focusNode,
+        autofocus: autofocus,
+        clipBehavior: clipBehavior,
+        child: Ink(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: kitBackgroundColors,
+                  begin: kitBegin as AlignmentGeometry,
+                  end: kitEnd as AlignmentGeometry),
+              borderRadius: BorderRadius.circular(kitRadius)),
+          child: Container(
+            padding: kitPadding,
+            width: kitWidth,
+            height: kitHeight,
+            alignment: Alignment.center,
+            child: Center(
+              child: child,
+            ),
+          ),
+        ),
+      );
 }
 
 class _KitElevatedButtonWithIconChild extends StatelessWidget {
