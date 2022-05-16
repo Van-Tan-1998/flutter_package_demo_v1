@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class KitInputDecoration extends InputDecoration {
   InputBorder? focusedBorder;
   InputBorder? border;
